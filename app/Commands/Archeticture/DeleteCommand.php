@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Commands\Command;
+namespace App\Commands\Archeticture;
 
-use App\Command as AppCommand;
+use App\Archeticture;
 use App\Trait\HasError;
 use App\Trait\HasSearch;
 use Illuminate\Console\Scheduling\Schedule;
@@ -12,20 +12,19 @@ class DeleteCommand extends Command
 {
     use HasError;
     use HasSearch;
-
     /**
      * The signature of the command.
      *
      * @var string
      */
-    protected $signature = 'command:delete';
+    protected $signature = 'arch:delete';
 
     /**
      * The description of the command.
      *
      * @var string
      */
-    protected $description = 'Delete a command';
+    protected $description = 'Delete an Archeticture';
 
     /**
      * Execute the console command.
@@ -34,15 +33,15 @@ class DeleteCommand extends Command
      */
     public function handle()
     {
-        $command = $this->search(
-            'the name of the command that you are searching for',
+        $archeticture = $this->search(
+            'the name of the archeticture that you are searching for',
             'name',
-            AppCommand::query(),
-            errorMessage: 'you can\'t delete this command because you don\'t have any command with the same name in the database'
+            Archeticture::query(),
+            errorMessage: 'you can\'t delete this archeticture because you don\'t have any archeticture with the same name in the database'
         );
 
-        $this->task('deleting command', function () use ($command) {
-            $command->delete();
+        $this->task('deleting archeticture', function () use ($archeticture) {
+            $archeticture->delete();
         });
     }
 

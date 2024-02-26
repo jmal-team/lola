@@ -38,7 +38,7 @@ class ExecuteCommand extends Command
             'the name of the command that you are searching for',
             'name',
             AppCommand::query(),
-            errorMessage: 'you can\'t add this command because you have a command with the same name in the database'
+            errorMessage: 'you can\'t execute this command because you have a command with the same name in the database'
         );
 
         $this->task('running commands', function () use ($command) {

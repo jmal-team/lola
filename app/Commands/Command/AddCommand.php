@@ -28,7 +28,7 @@ class AddCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Add a custom command';
+    protected $description = 'Add a new custom command';
 
     /**
      * Execute the console command.
