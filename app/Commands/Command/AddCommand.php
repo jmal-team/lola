@@ -7,6 +7,7 @@ use App\Trait\HasArguments;
 use App\Trait\HasError;
 use Illuminate\Console\Scheduling\Schedule;
 use LaravelZero\Framework\Commands\Command;
+use Illuminate\Support\Str;
 
 class AddCommand extends Command
 {
@@ -20,7 +21,6 @@ class AddCommand extends Command
      */
     protected $signature = 'command:add 
     {name? : the name of you command} 
-    {description? : the description of the command}
     ';
 
     /**
@@ -42,10 +42,9 @@ class AddCommand extends Command
         if (AppCommand::query()->where('name', $name)->exists()) {
             $this->errorAndDie('you can\'t add this command because you have a command with the same name in the database');
         }
-        $description = $this->validateAndAsk('description', 'What is the description of your command?');
         $commands = $this->askUntilExit('Enter the command that you want to add (if you have finished inserting your commands type `exit`)');
-
-        $command = AppCommand::create(compact('name', 'description', 'commands'));
+        $slug = Str::slug($name);
+        $command = AppCommand::create(compact('name', 'slug', 'commands'));
         $this->info('added a new command');
         $this->info($command);
     }

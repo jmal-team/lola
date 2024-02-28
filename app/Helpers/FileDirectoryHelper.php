@@ -7,11 +7,6 @@ use Illuminate\Support\Facades\Log;
 
 class FileDirectoryHelper
 {
-    public static function currentDirectory(): string
-    {
-        return str(shell_exec('pwd'))->trim();
-    }
-
     public static function createFile(string $path, $content)
     {
         try {
@@ -28,14 +23,16 @@ class FileDirectoryHelper
             return static::getDirectoryContent($path);
         }
 
-        return static::getFileContent($path);
+        return [static::getFileContent($path)];
     }
 
     private static function getDirectoryContent(string $path): array
     {
         $content = [];
         $files = File::allFiles($path);
-        $files = collect($files)->map(fn ($item) => str($item->getPathname())->replace(static::currentDirectory() . '/', '')->value())->toArray();
+        $files = collect($files)->map(fn (\Symfony\Component\Finder\SplFileInfo $item) => str($item->getRelativePath() . '/' . $item->getFilename())
+            ->prepend(str($path)->afterLast('/') . '/')
+            ->value())->toArray();
         foreach ($files as $filePath) {
             $content[] = static::getFileContent($filePath);
         }

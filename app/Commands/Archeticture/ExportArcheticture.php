@@ -3,29 +3,27 @@
 namespace App\Commands\Archeticture;
 
 use App\Archeticture;
-use App\Helpers\FileDirectoryHelper;
-use App\Trait\HasError;
 use App\Trait\HasSearch;
 use Illuminate\Console\Scheduling\Schedule;
+use Illuminate\Support\Facades\File;
 use LaravelZero\Framework\Commands\Command;
 
-class PublishCommand extends Command
+class ExportArcheticture extends Command
 {
-    use HasError;
     use HasSearch;
     /**
      * The signature of the command.
      *
      * @var string
      */
-    protected $signature = 'arch:publish';
+    protected $signature = 'arch:export';
 
     /**
      * The description of the command.
      *
      * @var string
      */
-    protected $description = 'Publish an archeticture';
+    protected $description = 'Export a single or multiple archetictures to a json file in the current directory';
 
     /**
      * Execute the console command.
@@ -34,20 +32,18 @@ class PublishCommand extends Command
      */
     public function handle()
     {
-        /**
-         * @var Archeticture
-         */
-        $archeticture = $this->search(
-            'the name of the archeticture that you are searching for',
+        $names = $this->search(
+            'Select the commands that you want to export',
             'name',
             Archeticture::query(),
-            errorMessage: 'you can\'t publish this archeticture because you don\'t have any archeticture with the same name in the database'
+            errorMessage: 'you can\'t export this archeticture because you don\'t have any archeticture with the same slug in the database'
         );
 
-        $this->task('publishing archeticture', function () use ($archeticture) {
-            foreach ($archeticture->tree as $item) {
-                FileDirectoryHelper::createFile($item['name'], $item['content']);
-            }
+        $archetictures = Archeticture::query()->whereIn('name', $names)->get();
+        $json = collect($archetictures)->map(fn ($archeticture) => $archeticture->toArray())->toArray();
+
+        $this->task('exporting data', function () use ($json) {
+            File::put('lola-archetictures.json', json_encode($json));
         });
     }
 

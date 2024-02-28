@@ -8,7 +8,7 @@ use App\Trait\HasSearch;
 use Illuminate\Console\Scheduling\Schedule;
 use LaravelZero\Framework\Commands\Command;
 
-class DeleteCommand extends Command
+class DeleteArcheticture extends Command
 {
     use HasError;
     use HasSearch;
@@ -37,7 +37,7 @@ class DeleteCommand extends Command
             'the name of the archeticture that you are searching for',
             'name',
             Archeticture::query(),
-            errorMessage: 'you can\'t delete this archeticture because you don\'t have any archeticture with the same name in the database'
+            errorMessage: 'you can\'t delete this archeticture because you don\'t have any archeticture with the same slug in the database'
         );
 
         $this->task('deleting archeticture', function () use ($archeticture) {

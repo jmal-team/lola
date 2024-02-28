@@ -38,7 +38,7 @@ class DeleteCommand extends Command
             'the name of the command that you are searching for',
             'name',
             AppCommand::query(),
-            errorMessage: 'you can\'t delete this command because you don\'t have any command with the same name in the database'
+            errorMessage: 'you can\'t delete this command because you don\'t have any command with the same slug in the database'
         );
 
         $this->task('deleting command', function () use ($command) {

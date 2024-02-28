@@ -8,9 +8,10 @@ trait HasSearch
 {
     public function search(string $question, string $queryColumn, Builder $query, string $errorMessage, bool $required = true)
     {
-        $value = $this->anticipate(
+        $value = $this->choice(
             $question,
-            $query->pluck($queryColumn)->toArray()
+            $query->pluck($queryColumn, 'slug')->toArray(),
+            multiple: true
         );
 
         if (!$value) {

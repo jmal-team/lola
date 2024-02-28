@@ -3,12 +3,14 @@
 namespace App\Commands\Command;
 
 use App\Command as AppCommand;
+use App\Trait\HasSearch;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Support\Facades\File;
 use LaravelZero\Framework\Commands\Command;
 
 class ExportCommand extends Command
 {
+    use HasSearch;
     /**
      * The signature of the command.
      *
@@ -30,7 +32,12 @@ class ExportCommand extends Command
      */
     public function handle()
     {
-        $names = $this->choice('Select the commands that you want to export', AppCommand::query()->pluck('name')->toArray(), multiple: true);
+        $names = $this->search(
+            'Select the commands that you want to export',
+            'name',
+            AppCommand::query(),
+            errorMessage: 'you can\'t export this command because you don\'t have any command with the same slug in the database'
+        );
 
         $commands = AppCommand::query()->whereIn('name', $names)->get();
 

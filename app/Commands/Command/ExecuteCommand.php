@@ -18,7 +18,7 @@ class ExecuteCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'command:exec';
+    protected $signature = 'command:exec {slug? : the slug of the command}';
 
     /**
      * The description of the command.
@@ -34,12 +34,14 @@ class ExecuteCommand extends Command
      */
     public function handle()
     {
-        $command = $this->search(
-            'the name of the command that you are searching for',
-            'name',
-            AppCommand::query(),
-            errorMessage: 'you can\'t execute this command because you have a command with the same name in the database'
-        );
+        $command = $this->argument('slug') ? AppCommand::query()
+            ->where('slug', $this->argument('slug'))
+            ->firstOr(callback: fn () => $this->errorAndDie('Can\'t find any archeticture by this slug')) : $this->search(
+                'the name of the command that you are searching for',
+                'name',
+                AppCommand::query(),
+                errorMessage: 'you can\'t execute this command because you have a command with the same slug in the database'
+            );
 
         $this->task('running commands', function () use ($command) {
             foreach ($command->commands as $cmd) {
