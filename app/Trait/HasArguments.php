@@ -6,8 +6,8 @@ trait HasArguments
 {
     public function validateAndAsk(string $nameOfField, string $question, $default = null)
     {
-        $value = $this->argument($nameOfField,);
-        if (!$value) {
+        $value = $this->argument($nameOfField);
+        if (! $value) {
             $value = $this->ask($question);
         }
 

@@ -14,13 +14,13 @@ trait HasSearch
             multiple: true
         );
 
-        if (!$value) {
-            die;
+        if (! $value) {
+            exit;
         }
 
         $model = $query->where($queryColumn, $value)->first();
 
-        if (!$model) {
+        if (! $model) {
             $this->errorAndDie($errorMessage);
         }
 

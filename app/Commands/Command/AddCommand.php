@@ -6,8 +6,8 @@ use App\Command as AppCommand;
 use App\Trait\HasArguments;
 use App\Trait\HasError;
 use Illuminate\Console\Scheduling\Schedule;
-use LaravelZero\Framework\Commands\Command;
 use Illuminate\Support\Str;
+use LaravelZero\Framework\Commands\Command;
 
 class AddCommand extends Command
 {
@@ -51,9 +51,6 @@ class AddCommand extends Command
 
     /**
      * Define the command's schedule.
-     *
-     * @param  \Illuminate\Console\Scheduling\Schedule  $schedule
-     * @return void
      */
     public function schedule(Schedule $schedule): void
     {

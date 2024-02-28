@@ -13,6 +13,7 @@ class PublishArcheticture extends Command
 {
     use HasError;
     use HasSearch;
+
     /**
      * The signature of the command.
      *
@@ -55,9 +56,6 @@ class PublishArcheticture extends Command
 
     /**
      * Define the command's schedule.
-     *
-     * @param  \Illuminate\Console\Scheduling\Schedule  $schedule
-     * @return void
      */
     public function schedule(Schedule $schedule): void
     {

@@ -12,6 +12,7 @@ class DeleteArcheticture extends Command
 {
     use HasError;
     use HasSearch;
+
     /**
      * The signature of the command.
      *
@@ -47,9 +48,6 @@ class DeleteArcheticture extends Command
 
     /**
      * Define the command's schedule.
-     *
-     * @param  \Illuminate\Console\Scheduling\Schedule  $schedule
-     * @return void
      */
     public function schedule(Schedule $schedule): void
     {

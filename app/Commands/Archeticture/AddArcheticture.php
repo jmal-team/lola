@@ -7,11 +7,9 @@ use App\Helpers\FileDirectoryHelper;
 use App\Trait\HasArguments;
 use App\Trait\HasError;
 use Illuminate\Console\Scheduling\Schedule;
-use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Facades\File;
-use LaravelZero\Framework\Commands\Command;
-use SebastianBergmann\CodeCoverage\Node\Directory;
 use Illuminate\Support\Str;
+use LaravelZero\Framework\Commands\Command;
 
 class AddArcheticture extends Command
 {
@@ -50,7 +48,7 @@ class AddArcheticture extends Command
 
         $slug = Str::slug($name);
         $path = $this->ask('What is the path of your archeticture? (default is current path)');
-        if (!File::exists($path)) {
+        if (! File::exists($path)) {
             $this->errorAndDie('the path that you specified is invalid');
         }
 
@@ -67,9 +65,6 @@ class AddArcheticture extends Command
 
     /**
      * Define the command's schedule.
-     *
-     * @param  \Illuminate\Console\Scheduling\Schedule  $schedule
-     * @return void
      */
     public function schedule(Schedule $schedule): void
     {

@@ -13,6 +13,7 @@ class ImportArcheticture extends Command
 {
     use HasArguments;
     use HasError;
+
     /**
      * The signature of the command.
      *
@@ -36,7 +37,7 @@ class ImportArcheticture extends Command
     {
         $path = $this->validateAndAsk('path', 'The path of json file (default is lola-archetictures.json)', default: 'lola-archetictures.json');
 
-        if (!File::exists($path)) {
+        if (! File::exists($path)) {
             $this->errorAndDie('the path that you specified is invalid');
         }
 
@@ -58,9 +59,6 @@ class ImportArcheticture extends Command
 
     /**
      * Define the command's schedule.
-     *
-     * @param  \Illuminate\Console\Scheduling\Schedule  $schedule
-     * @return void
      */
     public function schedule(Schedule $schedule): void
     {

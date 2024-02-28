@@ -37,7 +37,7 @@ class ImportCommand extends Command
     {
         $path = $this->validateAndAsk('path', 'The path of json file (default is lola-commands.json)', default: 'lola-commands.json');
 
-        if (!File::exists($path)) {
+        if (! File::exists($path)) {
             $this->errorAndDie('the path that you specified is invalid');
         }
 
@@ -59,9 +59,6 @@ class ImportCommand extends Command
 
     /**
      * Define the command's schedule.
-     *
-     * @param  \Illuminate\Console\Scheduling\Schedule  $schedule
-     * @return void
      */
     public function schedule(Schedule $schedule): void
     {

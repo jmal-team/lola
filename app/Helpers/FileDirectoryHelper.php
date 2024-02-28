@@ -3,7 +3,6 @@
 namespace App\Helpers;
 
 use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Log;
 
 class FileDirectoryHelper
 {
@@ -30,8 +29,8 @@ class FileDirectoryHelper
     {
         $content = [];
         $files = File::allFiles($path);
-        $files = collect($files)->map(fn (\Symfony\Component\Finder\SplFileInfo $item) => str($item->getRelativePath() . '/' . $item->getFilename())
-            ->prepend(str($path)->afterLast('/') . '/')
+        $files = collect($files)->map(fn (\Symfony\Component\Finder\SplFileInfo $item) => str($item->getRelativePath().'/'.$item->getFilename())
+            ->prepend(str($path)->afterLast('/').'/')
             ->value())->toArray();
         foreach ($files as $filePath) {
             $content[] = static::getFileContent($filePath);

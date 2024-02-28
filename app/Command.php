@@ -2,7 +2,6 @@
 
 namespace App;
 
-use App\Trait\Models\HasName;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -20,7 +19,8 @@ class Command extends Model
 
     public function __toString()
     {
-        $commands = collect($this->commands)->join(",");
+        $commands = collect($this->commands)->join(',');
+
         return "Command (name: {$this->name}, slug: {$this->slug}), command: [{$commands}])";
     }
 }

@@ -2,7 +2,6 @@
 
 namespace App;
 
-use App\Trait\Models\HasName;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 

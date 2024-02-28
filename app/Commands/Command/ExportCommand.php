@@ -11,6 +11,7 @@ use LaravelZero\Framework\Commands\Command;
 class ExportCommand extends Command
 {
     use HasSearch;
+
     /**
      * The signature of the command.
      *
@@ -50,9 +51,6 @@ class ExportCommand extends Command
 
     /**
      * Define the command's schedule.
-     *
-     * @param  \Illuminate\Console\Scheduling\Schedule  $schedule
-     * @return void
      */
     public function schedule(Schedule $schedule): void
     {
