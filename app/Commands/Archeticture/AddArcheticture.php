@@ -23,7 +23,6 @@ class AddArcheticture extends Command
      */
     protected $signature = 'arch:add
     {name? : the name of you command} 
-    {description? : the description of the command}
     ';
 
     /**
@@ -48,7 +47,7 @@ class AddArcheticture extends Command
 
         $slug = Str::slug($name);
         $path = $this->ask('What is the path of your archeticture? (default is current path)');
-        if (! File::exists($path)) {
+        if (!File::exists($path)) {
             $this->errorAndDie('the path that you specified is invalid');
         }
 

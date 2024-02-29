@@ -18,7 +18,7 @@ class DeleteCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'command:delete';
+    protected $signature = 'cmd:delete';
 
     /**
      * The description of the command.
@@ -34,15 +34,15 @@ class DeleteCommand extends Command
      */
     public function handle()
     {
-        $command = $this->search(
+        $commands = $this->search(
             'the name of the command that you are searching for',
             'name',
             AppCommand::query(),
             errorMessage: 'you can\'t delete this command because you don\'t have any command with the same slug in the database'
         );
 
-        $this->task('deleting command', function () use ($command) {
-            $command->delete();
+        $this->task('deleting command', function () use ($commands) {
+            $commands->each(fn ($command) => $command->delete());
         });
     }
 

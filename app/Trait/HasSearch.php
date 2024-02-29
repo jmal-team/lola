@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Builder;
 
 trait HasSearch
 {
+    use HasError;
+
     public function search(string $question, string $queryColumn, Builder $query, string $errorMessage, bool $required = true)
     {
         $value = $this->choice(
@@ -14,13 +16,13 @@ trait HasSearch
             multiple: true
         );
 
-        if (! $value) {
+        if (!$value) {
             exit;
         }
 
-        $model = $query->where($queryColumn, $value)->first();
+        $model = $query->whereIn('slug', $value)->get();
 
-        if (! $model) {
+        if (!$model) {
             $this->errorAndDie($errorMessage);
         }
 

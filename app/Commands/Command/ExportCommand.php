@@ -17,7 +17,7 @@ class ExportCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'command:export';
+    protected $signature = 'cmd:export';
 
     /**
      * The description of the command.
@@ -33,14 +33,12 @@ class ExportCommand extends Command
      */
     public function handle()
     {
-        $names = $this->search(
+        $commands = $this->search(
             'Select the commands that you want to export',
             'name',
             AppCommand::query(),
             errorMessage: 'you can\'t export this command because you don\'t have any command with the same slug in the database'
         );
-
-        $commands = AppCommand::query()->whereIn('name', $names)->get();
 
         $json = collect($commands)->map(fn ($command) => $command->toArray())->toArray();
 
