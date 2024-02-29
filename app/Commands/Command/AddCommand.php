@@ -19,7 +19,7 @@ class AddCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'command:add 
+    protected $signature = 'cmd:add 
     {name? : the name of you command} 
     ';
 

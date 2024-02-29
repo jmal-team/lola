@@ -18,7 +18,7 @@ class ExecuteCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'command:exec {slug? : the slug of the command}';
+    protected $signature = 'cmd:exec {slug? : the slug of the command}';
 
     /**
      * The description of the command.

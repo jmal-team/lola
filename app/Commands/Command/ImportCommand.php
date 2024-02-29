@@ -19,7 +19,7 @@ class ImportCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'command:import {path? : the path of json file}';
+    protected $signature = 'cmd:import {path? : the path of json file}';
 
     /**
      * The description of the command.
@@ -37,7 +37,7 @@ class ImportCommand extends Command
     {
         $path = $this->validateAndAsk('path', 'The path of json file (default is lola-commands.json)', default: 'lola-commands.json');
 
-        if (! File::exists($path)) {
+        if (!File::exists($path)) {
             $this->errorAndDie('the path that you specified is invalid');
         }
 
@@ -50,7 +50,7 @@ class ImportCommand extends Command
             foreach ($data as $item) {
                 AppCommand::create([
                     'name' => $item['name'],
-                    'description' => $item['description'],
+                    'slug' => $item['slug'],
                     'commands' => $item['commands'],
                 ]);
             }
