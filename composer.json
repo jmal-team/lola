@@ -1,13 +1,13 @@
 {
     "name": "jmal-team/lola",
-    "description": "The Laravel Zero Framework.",
+    "description": "Lola CLI.",
     "keywords": ["framework", "laravel", "laravel zero", "lola", "console", "cli"],
     "homepage": "https://laravel-zero.com",
     "type": "project",
     "license": "MIT",
     "support": {
-        "issues": "https://github.com/laravel-zero/laravel-zero/issues",
-        "source": "https://github.com/laravel-zero/laravel-zero"
+        "issues": "https://github.com/jmal-team/lola/issues",
+        "source": "https://github.com/jmal-team/lola"
     },
     "authors": [
         {
